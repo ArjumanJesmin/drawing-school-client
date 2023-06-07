@@ -22,7 +22,7 @@ const Navbar = () => {
                     <ul className="menu menu-horizontal px-1">
                         <li><Link className=" text-xl text-slate-800" to='/'>Home</Link></li>
                         <li><Link className=" text-xl text-slate-800" to='/instructors'>Instructors</Link></li>
-                        <li><Link className=" text-xl text-slate-800" to='/class'>Class</Link></li>
+                        <li><Link className=" text-xl text-slate-800" to='/class'>Classes</Link></li>
                         <li><Link className="text-xl text-slate-800" to='/dashboard'>Dashboard</Link></li>
                     </ul>
                 </div>

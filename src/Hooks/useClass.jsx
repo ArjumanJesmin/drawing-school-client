@@ -15,4 +15,4 @@ const useClass = () => {
     }, [])
     return [menu,loading];
 }
-export default useClass
+export default useClass;
