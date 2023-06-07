@@ -5,6 +5,7 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Home/Register/Register";
+import Error from "../Pages/Error/Error";
 
 const router = createBrowserRouter([
   {
@@ -25,5 +26,9 @@ const router = createBrowserRouter([
       },
     ]
   },
+  {
+    path: '/*',
+        element: <Error />
+  }
 ]);
 export default router
