@@ -56,6 +56,13 @@
         "category": "Drawing"
       },
       {
+        "name": "Cartooning 102",
+        "image": "https://img.freepik.com/free-vector/people-drawing-web-page-elements-smartphone-lcd-screen-front-end-development-it-concept-software-development-process-pinkish-coral-blue-palette-vector-illustration_335657-1640.jpg?w=740&t=st=1686141611~exp=1686142211~hmac=646a9dd1e8cc36af66d5fbefce790f0538f57930036e0f14e07201acb03f1637",
+        "price": 64.99,
+        "rating": 4.7,
+        "category": "Drawing"
+      },
+      {
         "name": "Collage Art Techniques",
         "image": "https://img.freepik.com/free-photo/woman-painting-clay-pot-close-up_23-2148944922.jpg?w=740&t=st=1686141693~exp=1686142293~hmac=8592e05cbf52f53976aad518cf3ee753a8acb8ffacf5c8d7a662e9bcf700caaa",
         "price": 44.99,
@@ -66,6 +73,13 @@
         "name": "Charcoal Portrait Drawing",
         "image": "https://img.freepik.com/free-photo/master-painting-mini-figures-with-brush_114579-12156.jpg?w=826&t=st=1686141755~exp=1686142355~hmac=b4835e289460d606f2c86ef6d946252d4c8160ab87d8023a78982ee737f52f75",
         "price": 49.99,
+        "rating": 4.8,
+        "category": "Drawing"
+      },
+      {
+        "name": " Portrait Drawing",
+        "image": "https://img.freepik.com/free-photo/master-painting-mini-figures-with-brush_114579-12156.jpg?w=826&t=st=1686141755~exp=1686142355~hmac=b4835e289460d606f2c86ef6d946252d4c8160ab87d8023a78982ee737f52f75",
+        "price": 59.99,
         "rating": 4.8,
         "category": "Drawing"
       }
