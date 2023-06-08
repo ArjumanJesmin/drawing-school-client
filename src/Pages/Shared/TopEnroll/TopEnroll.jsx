@@ -1,15 +1,17 @@
 /* eslint-disable react/prop-types */
 
-const TopEnroll = ({item}) => {
-    const {name,image, price,rating} = item
+const TopEnroll = ({ item }) => {
+    const { name, image, price, rating } = item
     return (
-        <div style={{borderRadius:'0 50px 0 50px'}} className="flex space-x-4 border md:p-4 border-yellow-400 shadow-md m-2">
-            <img style={{borderRadius:'0 50px 0 50px'}} className="md:w-64  rounded-xl" src={image} alt="" />
-            <div>
-                <h3 className="uppercase">{name}</h3>
+        <div className="card w-96 bg-base-100 shadow-xl">
+            <figure className="px-10 pt-10">
+                <img src={image} alt="Shoes" className="rounded-xl" />
+            </figure>
+            <div className="card-body items-center text-center">
+                <h2 className="card-title">{name}</h2>
                 <p>{rating}</p>
+                <p>${price}</p>
             </div>
-            <p className="text-yellow-500">${price}</p>
         </div>
     );
 };

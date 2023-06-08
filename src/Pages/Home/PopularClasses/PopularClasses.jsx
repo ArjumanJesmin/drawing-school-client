@@ -11,7 +11,7 @@ const PopularClasses = () => {
     return (
         <>
             <SectionTitle heading="Popular Classes" />
-            <div className="grid grid-cols-1 md:grid-cols-2  my-8 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3  my-8 gap-4">
                 {
                     popular.map(item => <TopEnroll item={item} key={item.name} />)
                 }

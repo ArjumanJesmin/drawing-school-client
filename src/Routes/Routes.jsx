@@ -7,6 +7,7 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Home/Register/Register";
 import Error from "../Pages/Error/Error";
 import Class from "../Pages/Class/Class";
+import Dashboard from "../Layout/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
         element: <Class />
       },
     ]
+  },
+  {
+    path:'/dashboard',
+    element:<Dashboard/>
   },
   {
     path: '/*',
