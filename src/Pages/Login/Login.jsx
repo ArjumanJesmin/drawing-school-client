@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 
 
@@ -11,7 +12,23 @@ const Login = () => {
     const { signIn } = useContext(AuthContext)
 
     const { register, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        signIn(data.email, data.password)
+            .then(Result => {
+                const user = Result.user
+                console.log(user);
+                Swal.fire({
+                    title: 'User LogIn Successfully',
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                })
+            })
+        console.log(data)
+    };
     return (
         <>
             <Helmet>
@@ -20,9 +37,19 @@ const Login = () => {
             <div className="w-1/3 gap-4 mx-auto border p-14 m-8 rounded-lg shadow-xl border-orange-400">
                 <h2 className="text-3xl font-semibold text-center pb-8 ">Login</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <input className="input input-bordered w-full mb-4 " defaultValue="email" {...register("email", { required: true })} />
-                    <input className="input input-bordered w-full mb-4 " defaultValue="password" {...register("password", { required: true })} />
-                    <input className="input input-bordered w-full  mb-4" defaultValue="confirm password" {...register("confirm password", { required: true })} />
+                    <div>
+                        <label htmlFor="email">Email:</label>
+                        <input type="email" className="input input-bordered w-full mb-4 " defaultValue="email" {...register("email", { required: true })} />
+
+                    </div>
+                    <div>
+                        <label htmlFor="password">Password:</label>
+                        <input type="password" className="input input-bordered w-full mb-4 " {...register("password", { required: true, minLength: 6, pattern: /[A-Za-z]+$/i })} />
+                    </div>
+                    <div>
+                        <label htmlFor="text">Conform Password:</label>
+                        <input type="password" className="input input-bordered w-full  mb-4"  {...register("confirm password", { required: true })} />
+                    </div>
                     <br />
                     <input className="btn btn-outline w-full btn-warning" type="submit" value="Login" />
                 </form>

@@ -46,7 +46,7 @@ const Register = () => {
                         {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one Uppercase one lower case, one number and one special character.</p>}
                     </div>
                     <div>
-                        <label htmlFor="text">Password:</label>
+                        <label htmlFor="text">Conform Password:</label>
                         <input type="password" className="input input-bordered w-full  mb-4"  {...register("confirm password", { required: true })} />
                         {errors.password?.type === 'required' && <p className="text-red-600">Password is required</p>}
                         {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
