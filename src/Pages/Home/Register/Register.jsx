@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link, Navigate } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
@@ -9,6 +9,7 @@ import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, updateUserProfile } = useContext(AuthContext)
+    const navigate = useNavigate();
 
     const onSubmit = data => {
 
@@ -40,7 +41,7 @@ const Register = () => {
                                         timer: 1500
                                     })
                                 }
-                                Navigate('/')
+                                navigate('/')
                             })
                     })
 
