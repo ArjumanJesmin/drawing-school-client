@@ -48,7 +48,7 @@ const Login = () => {
                     </div>
                     <div>
                         <label htmlFor="password">Password:</label>
-                        <input type="text" className="input input-bordered w-full mb-4 " {...register("password", { required: true, minLength: 6, pattern: /[A-Za-z]+$/i })} />
+                        <input type="text" className="input input-bordered w-full mb-4 " {...register("password", { required: true, minLength: 6, pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/ })} />
                     </div>
                     <div>
                         <label htmlFor="text">Conform Password:</label>

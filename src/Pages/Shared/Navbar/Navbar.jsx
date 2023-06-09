@@ -19,7 +19,7 @@ const Navbar = () => {
 
     return (
 
-        
+
         <div className="bg-gradient-to-r from-cyan-700 to-blue-500">
             <Container>
                 <div className="navbar">
@@ -44,12 +44,15 @@ const Navbar = () => {
                     <div className="navbar-end">
                         {
                             user?.uid ?
-                                <> <button onClick={handleLogout} className="btn btn-outline btn-warning">Log Out</button> </>
-                                 :
-                                <><Link to='/login'><button className="btn btn-outline btn-warning">Login</button>
-                                    </Link> </>
+                                <>
+                                    <button onClick={handleLogout} className="btn btn-outline btn-warning">LogOut</button>
+                                </>
+                                :
+                                <>
+                                    <Link to='/login'><button className="btn btn-outline btn-warning">Login</button>
+                                    </Link>
+                                </>
                         }
-                        {/* <Link to='/login'><button className="btn btn-outline btn-warning">Login</button> </Link>  */}
                     </div>
 
 
