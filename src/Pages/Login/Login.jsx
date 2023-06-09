@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 
 
@@ -58,6 +59,7 @@ const Login = () => {
                     <input className="btn btn-outline w-full btn-warning" type="submit" value="Login" />
                 </form>
                 <p className="py-6"> You have no account please <Link className="text-orange-500" to='/register'>Register</Link></p>
+                <SocialLogin/>
             </div>
         </>
     );
