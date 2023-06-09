@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, Navigate } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -106,7 +107,7 @@ const Register = () => {
                     <input className="btn btn-outline w-full btn-warning" type="submit" value="Register" />
                 </form>
                 <p className="py-6">You have all ready register please <Link className="text-orange-500" to='/login'>Login</Link></p>
-
+                <SocialLogin/>
             </div>
         </>
 
