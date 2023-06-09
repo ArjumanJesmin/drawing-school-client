@@ -1,9 +1,14 @@
+import { Helmet } from "react-helmet-async";
 
 const AddAClass = () => {
     return (
-        <div>
+        <>
+            <Helmet>
+                <title>Akibuki | Add A Class </title>
+            </Helmet>
+            
             <h3>Add A Class</h3>
-        </div>
+        </>
     );
 };
 

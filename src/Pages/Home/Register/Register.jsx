@@ -10,11 +10,15 @@ const Register = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext)
 
     const onSubmit = data => {
+
         createUser(data.email, data.password)
             .then(result => {
+
                 const loggedUser = result.user;
                 console.log(loggedUser);
+
                 updateUserProfile(data.name, data.photoUrl)
+
                     .then(() => {
                         const saveUser = { name: data.name, email: data.email }
                         fetch('http://localhost:5000/users', {
@@ -35,7 +39,7 @@ const Register = () => {
                                         timer: 1500
                                     })
                                 }
-                               Navigate('/')
+                                Navigate('/')
                             })
                     })
 
@@ -64,6 +68,7 @@ const Register = () => {
                         <input type="email" className="input input-bordered w-full mb-4 " defaultValue="email" {...register("email", { required: true })} />
 
                     </div>
+
                     <div>
                         <label htmlFor="password">Password:</label>
                         <input type="text" className="input input-bordered w-full mb-4 " {...register("password", { required: true, minLength: 6, pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/ })} />
@@ -71,6 +76,7 @@ const Register = () => {
                         {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
                         {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one Uppercase one lower case, one number and one special character.</p>}
                     </div>
+
                     <div>
                         <label htmlFor="text">Conform Password:</label>
                         <input type="password" className="input input-bordered w-full  mb-4"  {...register("confirm password", { required: true })} />
@@ -78,12 +84,24 @@ const Register = () => {
                         {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
                         {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one Uppercase one lower case, one number and one special character.</p>}
                     </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Photo URL</span>
+                        </label>
+                        <input type="text"  {...register("photoURL", { required: true })} placeholder="Photo URL" className="input input-bordered" />
+                        {errors.photoURL && <span className="text-red-600">Photo URL is required</span>}
+                    </div>
 
-                    <select className="input input-bordered w-full  mb-4" {...register("gender")}>
-                        <option value="female">female</option>
-                        <option value="male">male</option>
-                        <option value="other">other</option>
-                    </select>
+                    <div>
+                    <label className="label  mb-4">
+                            <span className="label-text">Gander</span>
+                        </label>
+                        <select className="input input-bordered w-full  mb-4" {...register("gender")}>
+                            <option value="female">female</option>
+                            <option value="male">male</option>
+                            <option value="other">other</option>
+                        </select>
+                    </div>
                     <br />
                     <input className="btn btn-outline w-full btn-warning" type="submit" value="Register" />
                 </form>
