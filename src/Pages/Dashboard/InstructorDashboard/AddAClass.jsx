@@ -1,14 +1,54 @@
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../Components/SectionTitle";
 import { useForm } from "react-hook-form";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
-// eslint-disable-next-line no-unused-vars
+
 const img_hosting_token = import.meta.env.VITE_Image_Upload_token
 
 const AddAClass = () => {
 
-    const { register, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const [axiosSecure] = useAxiosSecure();
+    const { register, handleSubmit, reset } = useForm();
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
+
+
+    const onSubmit = data => {
+        const formData = new FormData();
+        formData.append('image', data.image[0])
+
+        fetch(img_hosting_url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgResponse => {
+                if (imgResponse.success) {
+                    const imgURL = imgResponse.data.display_url;
+                    const { name, price, category, className } = data;
+                    const newItem = { className, name, price: parseFloat(price), category, image: imgURL }
+                    console.log(newItem)
+                    axiosSecure.post('/studentClass', newItem)
+                        .then(data => {
+                            console.log('after processing new menu item', data.data)
+
+                            if (data.data.insertedId) {
+                                reset();
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Class added successfully',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }
+                        })
+                }
+            })
+
+
+    };
 
     return (
         <>
@@ -20,14 +60,16 @@ const AddAClass = () => {
                 <SectionTitle heading="Add A Class" />
 
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="form-control w-full mb-4">
+
+                <div className="form-control w-full mb-4">
                         <label className="label">
-                            <span className="label-text font-semibold">Class name*</span>
+                            <span className="label-text font-semibold">class name*</span>
                         </label>
-                        <input type="text" placeholder="Class name"
-                            {...register("name", { required: true, maxLength: 120 })}
+                        <input type="" placeholder="class name"
+                            {...register("className", { required: true, maxLength: 120 })}
                             className="input input-bordered w-full " />
                     </div>
+
 
                     <div className="form-control w-full my-4">
                         <label className="label">
@@ -49,15 +91,12 @@ const AddAClass = () => {
                     <div className="flex my-4">
                         <div className="form-control w-full ">
                             <label className="label">
-                                <span className="label-text">Category*</span>
+                                <span className="label-text">Available seats*</span>
                             </label>
-                            <select defaultValue="Available seats" {...register("category", { required: true })} className="select select-bordered">
-                                <option disabled>Drawing</option>
-                                <option>Painting</option>
-                                <option>Digital Art</option>
-                                <option>Sculpting</option>
-                                <option>Mixed Media</option>
-                            </select>
+
+                            <input type="text" placeholder="Available seats"
+                                {...register("category", { required: true, maxLength: 120 })}
+                                className="input input-bordered w-full " />
                         </div>
 
                         <div className="form-control w-full ml-4">

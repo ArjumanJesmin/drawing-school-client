@@ -55,6 +55,7 @@ const AllUsers = () => {
                     .then(data => {
                         console.log(data);
                         if (data.deletedCount > 0) {
+                            refetch();
                             Swal.fire(
                                 'Deleted!',
                                 'This user has been deleted.',

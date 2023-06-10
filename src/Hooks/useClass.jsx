@@ -6,7 +6,7 @@ const useClass = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch('http://localhost:5000/allData')
+        fetch('http://localhost:5000/studentClass')
             .then(res => res.json())
             .then(data => {
                 setMenu(data)

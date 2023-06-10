@@ -5,7 +5,7 @@ import useClass from "../../../Hooks/useClass";
 const PopularClasses = () => {
 
     const [menu] = useClass()
-    const popular = menu.filter(item => item.category === 'Drawing')
+    const popular = menu.filter(item => item.className === 'Drawing')
 
 
     return (
