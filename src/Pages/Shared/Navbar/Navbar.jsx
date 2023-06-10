@@ -1,18 +1,17 @@
+/* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
 import Container from "../Container/Container";
 import { AiOutlineCrown } from 'react-icons/ai';
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
-// import useCart from "../../../Hooks/useCart";
 
 
 const Navbar = () => {
-    // const [cart] = useCart()
-
+   
     const { user, logOut } = useContext(AuthContext);
-    console.log(user)
-
+    
+    
     const handleLogout = () => {
         logOut()
             .then(() => {
