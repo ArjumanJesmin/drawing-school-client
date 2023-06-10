@@ -6,7 +6,7 @@ import useInstructor from "../Hooks/useInstructor";
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
-  console.log(isAdmin);
+  console.log(isInstructor);
 
   return (
     <>
@@ -14,7 +14,7 @@ const Dashboard = () => {
         <title>Akibuki | Dashboard </title>
       </Helmet>
 
-      <div className="drawer lg:drawer-open">
+      <div className="drawer lg:drawer-open ">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-center justify-center">
           {/* Page content here */}
@@ -48,47 +48,47 @@ const Dashboard = () => {
         {/* ------------------------------------- */}
 
         {/* Side Drawer */}
-        <div className="drawer-side">
+        <div className="drawer-side ">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 h-full bg-red-200 text-base-content">
             {isAdmin && (
               <>
+              <li>
+                  <NavLink to="/dashboard/addAClass">Add A Class</NavLink>
+                </li>
                 <li>
                   <NavLink to="/dashboard/manageClass">Manage Class</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/allUsers">All Users</NavLink>
+                  <NavLink to="/dashboard/allUsers">Manage Users</NavLink>
                 </li>
-                <li>
-                  <NavLink to="/dashboard/addAClass">Add A Class</NavLink>
-                </li>
-                
               </>
             )}
             {isInstructor && (
               <>
+                
                 <li>
-                  <NavLink to="/dashboard/myEnrollClass">Instructor Home</NavLink>
+                  <NavLink to="/dashboard/myClass">My Class</NavLink>
                 </li>
+
                 <li>
-                  <NavLink to="/dashboard/myEnrollClass">Payment History</NavLink>
+                  <NavLink to="/dashboard/instructorHome">Instructor Home</NavLink>
                 </li>
-                <li>
-                  <NavLink to="/dashboard/mySelectedClass">My Selected Class</NavLink>
-                </li>
+
               </>
             )}
             {!isAdmin && !isInstructor && (
               <>
-              <li>
-                  <NavLink to="/dashboard/myClass">My Class</NavLink>
-                </li>
-              <li>
+
+                <li>
                   <NavLink to="/dashboard/myEnrollClass">My Enroll Class</NavLink>
                 </li>
-                
+
                 <li>
                   <NavLink to="/dashboard/mySelectedClass">My Selected Class</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/paymentHistory"><button className="btn btn-info">Payment </button> </NavLink>
                 </li>
               </>
             )}
