@@ -62,9 +62,7 @@ const Dashboard = () => {
                 <li>
                   <NavLink to="/dashboard/addAClass">Add A Class</NavLink>
                 </li>
-                <li>
-                  <NavLink to="/dashboard/myClass">My Class</NavLink>
-                </li>
+                
               </>
             )}
             {isInstructor && (
@@ -73,18 +71,22 @@ const Dashboard = () => {
                   <NavLink to="/dashboard/myEnrollClass">Instructor Home</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/myEnrollClass">My Enroll Class</NavLink>
+                  <NavLink to="/dashboard/myEnrollClass">Payment History</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/mySelectedClass">Submitted Subject</NavLink>
+                  <NavLink to="/dashboard/mySelectedClass">My Selected Class</NavLink>
                 </li>
               </>
             )}
             {!isAdmin && !isInstructor && (
               <>
-                <li>
-                  <NavLink to="/dashboard/myEnrollClass">Payment History</NavLink>
+              <li>
+                  <NavLink to="/dashboard/myClass">My Class</NavLink>
                 </li>
+              <li>
+                  <NavLink to="/dashboard/myEnrollClass">My Enroll Class</NavLink>
+                </li>
+                
                 <li>
                   <NavLink to="/dashboard/mySelectedClass">My Selected Class</NavLink>
                 </li>
