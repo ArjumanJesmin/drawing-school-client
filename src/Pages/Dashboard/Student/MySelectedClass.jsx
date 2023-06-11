@@ -1,102 +1,49 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+
 import { Helmet } from "react-helmet-async";
-// import { useHistory } from "react-router-dom";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import ShowMyClass from "./ShowMyClass";
 
 const MySelectedClass = () => {
-    const handlePay = async (classId) => {
-        try {
-            // Redirect to the payment page
-            history.push(`/payment/${classId}`);
+    const [selectedClassData, setSelectedClassData] = useState([]);
 
-            // Perform payment processing logic on the backend
-            const response = await axios.post(`/api/payment/${classId}`);
-
-            // Assuming payment is successful
-            const updatedClass = response.data;
-
-            // Update the available seats for the particular class in the My Enrolled Classes page
-            // (You need to implement the logic to update the class information in your frontend)
-
-            // Remove the class from My Selected Classes page
-            // (You need to implement the logic to remove the class from the list in your frontend)
-        } catch (error) {
-            console.error('Error processing payment:', error);
-            // Handle error
-        }
-    };
-
-
-    const [selectedClasses, setSelectedClasses] = useState([
-        // Sample selected classes data
-        {
-            id: 1,
-            name: 'Class 1',
-            instructor: 'Instructor 1',
-            price: 9.99,
-        },
-        // Add more selected classes as needed
-    ]);
-
-    const handleDeleteClass = (id) => {
-        setSelectedClasses((prevSelectedClasses) =>
-            prevSelectedClasses.filter((classData) => classData.id !== id)
-        );
-    };
-
+    useEffect(() => {
+        fetch('http://localhost:5000/myClass')
+            .then(response => response.json())
+            .then(data => setSelectedClassData(data))
+    }, []);
     return (
-        <>
+        <div className="mx-4 ">
             <Helmet>
                 <title >Akibuki | My Selected Class </title>
             </Helmet>
 
-            <div className=" text-center w-full m-10 border">
+            <div className=" text-center mx-10 p-4 md:p-12 w-100% border rounded-lg shadow-md">
                 <h2 className="text-2xl py-4 text-orange-800 font-semibold">My Selected Classes</h2>
-                {selectedClasses.length === 0 ? (
-                    <p>No selected classes</p>
-                ) : (
-                    <table className="table w-full shadow p-6 ">
+                <div>
+                    <table>
                         <thead>
-                            <tr className="text-xl text-cyan-900">
-                                <th>Class Name</th>
-                                <th>Instructor Name</th>
-                                <th>Price</th>
-                                <th>Action</th>
+                            <tr>
+                                <th > # </th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>price</th>
+
+                                <th>availableSeats</th>
+                                
+                                
                             </tr>
                         </thead>
-                        <tbody className="text-xl text-cyan-900">
-                            {selectedClasses.map((classData) => (
-                                <tr key={classData.id}>
-                                    <td>{classData.name}</td>
-                                    <td>{classData.instructor}</td>
-                                    <td>${classData.price}</td>
-                                    <td>
-                                        <button
-                                            className="btn btn-error"
-                                            onClick={() => handleDeleteClass(classData.id)}
-                                        >
-                                            Delete
-                                        </button>
-                                        {/* Add Pay button and other relevant information */}
-                                    </td>
-                                </tr>
-                            ))}
+
+                        <tbody>
+                            {
+                                selectedClassData.map((data, index)=> <ShowMyClass data={data} index={index} key={data._id}/>)
+                            }
                         </tbody>
                     </table>
-                )}
-            </div>
-            {selectedClasses.map((classData) => (
-                <div key={classData.id}>
-                    <h3>{classData.name}</h3>
-                    <p>Instructor: {classData.instructor}</p>
-                    <p>Available Seats: {classData.availableSeats}</p>
-                    {/* Other class information */}
-                    <button onClick={() => handlePay(classData.id)}>Pay</button>
                 </div>
-            ))}
-
-        </>
+            </div>
+        </div>
     );
 };
 

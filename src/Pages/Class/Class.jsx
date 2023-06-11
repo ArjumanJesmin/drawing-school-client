@@ -8,10 +8,6 @@ import AllClass from "./AllClass";
 
 const Class = () => {
     const [menu] = useClass();
-
-
-    
-
     return (
 
         <>

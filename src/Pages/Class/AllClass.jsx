@@ -78,7 +78,7 @@ const AllClass = ({ classData }) => {
                 }}
             >
                 <div className="card w-96 bg-base-100 shadow-xl">
-                    <img src={image} alt="Class" />
+                    <img  src={image} alt="Class" />
                     <div className="card-body">
                         <h2>{name}</h2>
                         <p>Instructor: {instructor}</p>

@@ -1,112 +1,121 @@
+/* eslint-disable no-unused-vars */
 import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const ManageClass = () => {
 
-    const [classes, setClasses] = useState([]);
+  const [showClass, setShowClass] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        // Fetch all the classes from the backend
-        const fetchClasses = async () => {
-          try {
-            const response = await axios.get("/studentClass");
-            setClasses(response.data);
-          } catch (error) {
-            console.error("Error fetching classes:", error);
-          }
-        };
-    
-        fetchClasses();
-      }, []);
+  useEffect(() => {
+    fetch('http://localhost:5000/studentClass')
+      .then(res => res.json())
+      .then(data => {
+        setShowClass(data);
+        setLoading(false)
+      })
+  }, [])
 
-      const handleApprove = async (_id) => {
-        try {
-          // Send the request to approve the class to the backend
-          await axios.put(`/studentClass/${_id}/approve`);
-          
-          // Update the class status in the frontend
-    
-        } catch (error) {
-          console.error("Error approving class:", error);
-        }
-      };
-    
-      const handleDeny = async (_id) => {
-        try {
-          // Send the request to deny the class to the backend
-          await axios.put(`/studentClass/${_id}/deny`);
-          
-          // Update the class status in the frontend
-    
-        } catch (error) {
-          console.error("Error denying class:", error);
-        }
-      };
-    
-      const handleSendFeedback = async (_id, feedback) => {
-        try {
-          // Send the feedback for the class to the backend
-          await axios.put(`/studentClass/${_id}/feedback`, { feedback });
-          
-          // Update the class feedback in the frontend
-    
-        } catch (error) {
-          console.error("Error sending feedback:", error);
-        }
-      };
-    return (
-        <>
-            <Helmet>
-                <title>Akibuki | ManageClass </title>
-            </Helmet>
-            
 
-            <div>
-      <h1>Manage Classes</h1>
-      {classes.length === 0 ? (
-        <p>No classes found.</p>
-      ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Class Image</th>
-              <th>Class Name</th>
-              <th>Instructor Name</th>
-              <th>Instructor Email</th>
-              <th>Available Seats</th>
-              <th>Price</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {classes.map((classData) => (
-              <tr key={classData.id}>
-                <td><img src={classData.image} alt="Class" /></td>
-                <td>{classData.name}</td>
-                <td>{classData.instructorName}</td>
-                <td>{classData.instructorEmail}</td>
-                <td>{classData.availableSeats}</td>
-                <td>{classData.price}</td>
-                <td>{classData.status}</td>
-                <td>
-                  {classData.status === "pending" && (
-                    <>
-                      <button onClick={() => handleApprove(classData.id)}>Approve</button>
-                      <button onClick={() => handleDeny(classData.id)}>Deny</button>
-                      <button onClick={() => handleSendFeedback(classData.id, "Your feedback")}>Send Feedback</button>
-                    </>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
-        </>
-    );
+  const handlePost = (data) => {
+    console.log(data)
+
+    fetch('http://localhost:5000/manageClass', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(() => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Class Posted successfully.',
+          showConfirmButton: false,
+          timer: 1500
+        });
+
+      })
+  }
+
+  // -----------handleDelete---------------
+  const handleDelete = user => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/manageClass/${user._id}`, {
+          method: 'DELETE',
+
+        })
+
+          .then(res => res.json())
+          .then(data => {
+            if (data.deletedCount > 0) {
+              // refatch();
+              Swal.fire(
+                'Deleted!',
+                'Your class has been deleted.',
+                'success'
+              )
+            }
+          })
+
+      }
+    })
+  }
+  return (
+    <>
+      <Helmet>
+        <title>Akibuki | ManageClass </title>
+      </Helmet>
+
+      <div className="w-full">
+            <h3 className="text-3xl font-semibold my-4">Total Remaining Class: {showClass.length}</h3>
+            <div className="overflow-x-auto">
+                <table className="table table-zebra w-full">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Class name</th>
+                            <th>Instructor Name</th>
+                            <th>Price</th>
+                            <th>AvailableSeats</th>
+                            <th>Delete</th>
+                            <th>Post</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            showClass.map((data, index) => <tr key={data._id}>
+                                <th>{index + 1}</th>
+                                <td>{data.className}</td>
+                                <td>{data.instructor}</td>
+                                <td>{data.price}</td>
+                                <td>{data.availableSeats}</td>
+
+                                <td><button onClick={() => handleDelete(data)} className="btn btn-sm bg-red-500  text-white">Reject</button></td>
+                                <td><button onClick={() => handlePost(data)} className="btn btn-sm bg-yellow-500  text-white">Post</button></td>
+                            </tr>)
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </>
+  );
 };
 
 export default ManageClass;

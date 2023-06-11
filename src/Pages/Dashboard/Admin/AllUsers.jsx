@@ -113,12 +113,12 @@ const AllUsers = () => {
                                     <td>{user.email}</td>
                                     <td >{user.role}</td>
                                     <td>
-                                        <button className="btn btn-info btn-sm" disabled={user.role === 'Admin'} onClick={() => handleMakeAdmin(user)}>
+                                        <button className="btn text-white bg-orange-500 btn-sm" disabled={user.role === 'Admin'} onClick={() => handleMakeAdmin(user)}>
                                             Admin
                                         </button>
                                     </td>
                                     <td>
-                                        <button className="btn btn-success btn-sm" disabled={user.role === 'Instructor'} onClick={() => handleMakeInstructor(user)}>
+                                        <button className="btn bg-lime-600 text-white btn-sm" disabled={user.role === 'Instructor'} onClick={() => handleMakeInstructor(user)}>
                                             Instructor
                                         </button>
                                     </td>

@@ -89,7 +89,7 @@ const Dashboard = () => {
                   <NavLink to="/dashboard/mySelectedClass">My Selected Class</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/paymentHistory">Payment</NavLink>
+                  <NavLink to="/dashboard/payment">Payment</NavLink>
                   {/* <button className="btn btn-info">Payment </button> */}
                 </li>
               </>

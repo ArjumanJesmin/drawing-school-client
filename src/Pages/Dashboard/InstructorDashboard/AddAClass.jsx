@@ -93,9 +93,8 @@ const AddAClass = () => {
                             <label className="label">
                                 <span className="label-text">Available seats*</span>
                             </label>
-
                             <input type="text" placeholder="Available seats"
-                                {...register("availableSeats", { required: true, maxLength: 120 })}
+                                {...register("availableSeats", { required: true})}
                                 className="input input-bordered w-full " />
                         </div>
 

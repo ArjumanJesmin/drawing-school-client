@@ -51,7 +51,10 @@ const Navbar = () => {
                                 user?.uid ?
                                     <>
                                         <Link className="text-xl text-white my-4" to='/dashboard'>Dashboard</Link>
-                                        <img src={user.profileImage} alt="Profile" />
+
+                                        <div className="w-10 mx-4 ">
+                                            <img className="rounded-full" src={user.photoURL} />
+                                        </div>
 
                                         <button onClick={handleLogout} className="btn btn-outline btn-warning">LogOut</button>
                                     </>

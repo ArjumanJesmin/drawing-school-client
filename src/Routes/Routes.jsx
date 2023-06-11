@@ -17,6 +17,7 @@ import PrivateRoute from "./PrivateRoute";
 import AllUsers from "../Pages/Dashboard/Admin/AllUsers";
 import AdminRoute from "./AdminRoute";
 import DashboardLayout from "../Layout/DashboardLayout";
+import Payment from "../Pages/Dashboard/Student/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: 'mySelectedClass',
         element: <MySelectedClass/>
+      },
+      {
+        path: 'payment',
+        element: <Payment/>
       },
     ]
   },
