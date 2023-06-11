@@ -10,7 +10,7 @@ const ManageClass = () => {
         // Fetch all the classes from the backend
         const fetchClasses = async () => {
           try {
-            const response = await axios.get("/classes");
+            const response = await axios.get("/studentClass");
             setClasses(response.data);
           } catch (error) {
             console.error("Error fetching classes:", error);
@@ -20,10 +20,10 @@ const ManageClass = () => {
         fetchClasses();
       }, []);
 
-      const handleApprove = async (classId) => {
+      const handleApprove = async (_id) => {
         try {
           // Send the request to approve the class to the backend
-          await axios.put(`/classes/${classId}/approve`);
+          await axios.put(`/studentClass/${_id}/approve`);
           
           // Update the class status in the frontend
     
@@ -32,10 +32,10 @@ const ManageClass = () => {
         }
       };
     
-      const handleDeny = async (classId) => {
+      const handleDeny = async (_id) => {
         try {
           // Send the request to deny the class to the backend
-          await axios.put(`/classes/${classId}/deny`);
+          await axios.put(`/studentClass/${_id}/deny`);
           
           // Update the class status in the frontend
     
@@ -44,10 +44,10 @@ const ManageClass = () => {
         }
       };
     
-      const handleSendFeedback = async (classId, feedback) => {
+      const handleSendFeedback = async (_id, feedback) => {
         try {
           // Send the feedback for the class to the backend
-          await axios.put(`/classes/${classId}/feedback`, { feedback });
+          await axios.put(`/studentClass/${_id}/feedback`, { feedback });
           
           // Update the class feedback in the frontend
     

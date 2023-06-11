@@ -6,7 +6,7 @@ import useInstructor from "../Hooks/useInstructor";
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
-  console.log(isInstructor);
+  console.log({isAdmin});
 
   return (
     <>
@@ -31,6 +31,7 @@ const Dashboard = () => {
         <div>
           <h2 className="text-2xl">DashBoard</h2>
           {isAdmin ? (
+            
             <p>
               Admin Online <span className="text-5xl text-slate-500">.</span>{" "}
             </p>
@@ -88,7 +89,8 @@ const Dashboard = () => {
                   <NavLink to="/dashboard/mySelectedClass">My Selected Class</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/paymentHistory"><button className="btn btn-info">Payment </button> </NavLink>
+                  <NavLink to="/dashboard/paymentHistory">Payment</NavLink>
+                  {/* <button className="btn btn-info">Payment </button> */}
                 </li>
               </>
             )}

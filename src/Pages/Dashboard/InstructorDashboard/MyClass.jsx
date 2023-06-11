@@ -12,7 +12,7 @@ const MyClass = () => {
         // Fetch the classes for the instructor from the backend
         const fetchClasses = async () => {
             try {
-                const response = await axios.get("/api/instructor/classes");
+                const response = await axios.get("/instructor/studentClass");
                 setClasses(response.data);
             } catch (error) {
                 console.error("Error fetching classes:", error);
@@ -47,7 +47,7 @@ const MyClass = () => {
               <td>{classData.totalEnrolledStudents}</td>
               <td>{classData.status === "denied" ? classData.feedback : "-"}</td>
               <td>
-                <button onClick={() => handleUpdate(classData.id)}>Update</button>
+                <button onClick={() => handleUpdate(classData._id)}>Update</button>
               </td>
             </tr>
           ))}

@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
-import { FaTrashAlt, FaUserAlt } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
