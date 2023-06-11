@@ -49,12 +49,9 @@ const Login = () => {
                     </div>
                     <div>
                         <label htmlFor="password">Password:</label>
-                        <input type="text" className="input input-bordered w-full mb-4 " {...register("password", { required: true, minLength: 6, pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/ })} />
+                        <input type="password" className="input input-bordered w-full mb-4 " {...register("password", { required: true, minLength: 6, pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/ })} />
                     </div>
-                    <div>
-                        <label htmlFor="text">Conform Password:</label>
-                        <input type="text" className="input input-bordered w-full  mb-4"  {...register("confirm password", { required: true })} />
-                    </div>
+
                     <br />
                     <input className="btn btn-outline w-full btn-warning" type="submit" value="Login" />
                 </form>

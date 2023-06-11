@@ -73,7 +73,7 @@ const Register = () => {
 
                     <div>
                         <label htmlFor="password">Password:</label>
-                        <input type="text" className="input input-bordered w-full mb-4 " {...register("password", { required: true, minLength: 6, pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/ })} />
+                        <input type="password" className="input input-bordered w-full mb-4 " {...register("password", { required: true, minLength: 6, pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/ })} />
                         {errors.password?.type === 'required' && <p className="text-red-600">Password is required</p>}
                         {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
                         {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one Uppercase one lower case, one number and one special character.</p>}

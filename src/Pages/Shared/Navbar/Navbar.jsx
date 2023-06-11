@@ -8,10 +8,10 @@ import { Helmet } from "react-helmet-async";
 
 
 const Navbar = () => {
-   
+
     const { user, logOut } = useContext(AuthContext);
-    
-    
+
+
     const handleLogout = () => {
         logOut()
             .then(() => {
@@ -43,13 +43,16 @@ const Navbar = () => {
                                 <li><Link className=" text-xl text-white" to='/'>Home</Link></li>
                                 <li><Link className=" text-xl text-white" to='/instructors'>Instructors</Link></li>
                                 <li><Link className=" text-xl text-white" to='/class'>Classes</Link></li>
-                                <li><Link className="text-xl text-white" to='/dashboard'>Dashboard</Link></li>
+
                             </ul>
                         </div>
                         <div className="navbar-end">
                             {
                                 user?.uid ?
                                     <>
+                                        <Link className="text-xl text-white my-4" to='/dashboard'>Dashboard</Link>
+                                        <img src={user.profileImage} alt="Profile" />
+
                                         <button onClick={handleLogout} className="btn btn-outline btn-warning">LogOut</button>
                                     </>
                                     :
@@ -59,7 +62,6 @@ const Navbar = () => {
                                     </>
                             }
                         </div>
-
 
                     </div>
                 </Container>
