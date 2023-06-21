@@ -6,7 +6,7 @@ const useClass = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch('http://localhost:5000/studentClass')
+        fetch('https://akibuki-school-server-side.vercel.app/studentClass')
             .then(res => res.json())
             .then(data => {
                 setMenu(data)

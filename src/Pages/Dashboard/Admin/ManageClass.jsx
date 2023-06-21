@@ -10,7 +10,7 @@ const ManageClass = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/studentClass')
+    fetch('https://akibuki-school-server-side.vercel.app/studentClass')
       .then(res => res.json())
       .then(data => {
         setShowClass(data);
@@ -22,7 +22,7 @@ const ManageClass = () => {
   const handlePost = (data) => {
     console.log(data)
 
-    fetch('http://localhost:5000/manageClass', {
+    fetch('https://akibuki-school-server-side.vercel.app/manageClass', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -54,7 +54,7 @@ const ManageClass = () => {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/manageClass/${user._id}`, {
+        fetch(`https://akibuki-school-server-side.vercel.app/manageClass/${user._id}`, {
           method: 'DELETE',
 
         })

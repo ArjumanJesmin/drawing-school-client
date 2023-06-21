@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState } from "react";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useEffect } from "react";
-import UseAuth from "../../../hooks/UseAuth";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import UseAuth from "../../../../Hooks/UseAuth";
 
 const CheckoutForm = ({ cart, price }) => {
 
@@ -17,13 +18,16 @@ const CheckoutForm = ({ cart, price }) => {
     const [processing, setProcessing] = useState(false)
     const [transactionId, setTransactionId] = useState('')
 
+    
     useEffect(() => {
+        if(price==0) return
         axiosSecure.post('/create-payment-intent', { price })
             .then(res => {
                 // console.log(res.data.clientSecret);
                 setClientSecret(res.data.clientSecret)
             })
-    }, [])
+    }, [price])
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -78,14 +82,17 @@ const CheckoutForm = ({ cart, price }) => {
                 email: user?.email,
                 transactionId: paymentIntent.id,
                 price,
+                date: new Date(),
                 quantity: cart.length,
-                items: cart.map(item => item._id),
+                cartItems: cart.map(item => item._id),
+                menuItems: cart.map(item => item.menuItemId),
+                status: 'service pending',
                 itemNames: cart.map(item => item.name)
             }
             axiosSecure.post('/payments',payment)
             .then(res =>{
                 console.log(res.data);
-                if(res.data.insertedId){
+                if (res.data.insertResult.insertedId){
                     //display confirm use sweet 
                     alert('confirm successfully')
                 }
@@ -97,7 +104,7 @@ const CheckoutForm = ({ cart, price }) => {
 
     return (
         <>
-            <form className="w-2/3 m-8" onSubmit={handleSubmit}>
+            <form className=" m-8" onSubmit={handleSubmit}>
                 <CardElement
                     options={{
                         style: {

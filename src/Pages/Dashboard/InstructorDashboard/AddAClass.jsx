@@ -26,8 +26,8 @@ const AddAClass = () => {
             .then(imgResponse => {
                 if (imgResponse.success) {
                     const imgURL = imgResponse.data.display_url;
-                    const {instructor, price, category, className } = data;
-                    const newItem = { className, instructor, price: parseFloat(price), category, image: imgURL }
+                    const {instructor, price, category,availableSeats, className } = data;
+                    const newItem = { className, instructor, price: parseFloat(price), category, image: imgURL,availableSeats:parseInt(availableSeats) }
                     console.log(newItem)
                     axiosSecure.post('/studentClass', newItem)
                         .then(data => {
@@ -105,7 +105,6 @@ const AddAClass = () => {
                             <input type="number" {...register("price", { required: true })} placeholder="Type here" className="input input-bordered w-full " />
                         </div>
                     </div>
-
                     <input className="btn mt-4 btn-outline  " type="submit" value="Add Class" />
                 </form>
             </div>

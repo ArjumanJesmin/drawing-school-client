@@ -18,6 +18,8 @@ import AllUsers from "../Pages/Dashboard/Admin/AllUsers";
 import AdminRoute from "./AdminRoute";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Payment from "../Pages/Dashboard/Student/Payment/Payment";
+import PaymentHistery from "../Pages/Dashboard/Student/Payment/PaymentHistery";
+import Instructors from "../Pages/Dashboard/InstructorDashboard/Instructors";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />
+      },
+      {
+        path: '/instructors',
+        element: <Instructors />
       },
       {
         path: '/login',
@@ -53,11 +59,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'allUsers',
-        element: <AllUsers/>
+        element: <AdminRoute><AllUsers/></AdminRoute>
       },
       {
         path: 'addAClass',
-        element: <AdminRoute><AddAClass/></AdminRoute>
+        element: <AddAClass/>
       },
       {
         path: 'myClass',
@@ -74,6 +80,10 @@ const router = createBrowserRouter([
       {
         path: 'payment',
         element: <Payment/>
+      },
+      {
+        path: 'paymentHistery',
+        element: <PaymentHistery/>
       },
     ]
   },

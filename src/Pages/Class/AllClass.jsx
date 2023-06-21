@@ -27,7 +27,7 @@ const AllClass = ({ classData }) => {
 
         if (user && user.email) {
             const classItem = { name, image, availableSeats, email: user? user.email:'' }
-            fetch('http://localhost:5000/myClass', {
+            fetch('https://akibuki-school-server-side.vercel.app/myClass', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

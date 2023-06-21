@@ -6,7 +6,7 @@ import useInstructor from "../Hooks/useInstructor";
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
-  console.log({isAdmin});
+  console.log({ isAdmin });
 
   return (
     <>
@@ -31,7 +31,7 @@ const Dashboard = () => {
         <div>
           <h2 className="text-2xl">DashBoard</h2>
           {isAdmin ? (
-            
+
             <p>
               Admin Online <span className="text-5xl text-slate-500">.</span>{" "}
             </p>
@@ -54,12 +54,11 @@ const Dashboard = () => {
           <ul className="menu p-4 w-80 h-full bg-red-200 text-base-content">
             {isAdmin && (
               <>
-              <li>
-                  <NavLink to="/dashboard/addAClass">Add A Class</NavLink>
-                </li>
+
                 <li>
                   <NavLink to="/dashboard/manageClass">Manage Class</NavLink>
                 </li>
+
                 <li>
                   <NavLink to="/dashboard/allUsers">Manage Users</NavLink>
                 </li>
@@ -67,7 +66,11 @@ const Dashboard = () => {
             )}
             {isInstructor && (
               <>
-                
+
+                <li>
+                  <NavLink to="/dashboard/addAClass">Add A Class</NavLink>
+                </li>
+
                 <li>
                   <NavLink to="/dashboard/myClass">My Class</NavLink>
                 </li>
@@ -90,12 +93,15 @@ const Dashboard = () => {
                 </li>
                 <li>
                   <NavLink to="/dashboard/payment">Payment</NavLink>
-                  {/* <button className="btn btn-info">Payment </button> */}
+                  <NavLink to="/dashboard/paymentHistery">Payment History</NavLink>
+
                 </li>
               </>
             )}
 
             <div className="divider"></div>
+
+
             <li>
               <NavLink to="/">Student Home</NavLink>
             </li>
