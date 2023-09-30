@@ -11,7 +11,7 @@ const Class = () => {
     return (
 
         <>
-            <SectionTitle heading='All Class' />
+            <SectionTitle heading='All' subHeading=" Class" />
 
             {/* ---------------------------------------------------- */}
             <div className="grid sm:grid-cols-1 md:grid-cols-3 my-8  gap-4">

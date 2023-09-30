@@ -1,14 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
 import Container from "../Container/Container";
-import { AiOutlineCrown } from 'react-icons/ai';
+import { AiOutlineCrown } from 'react-icons/Ai';
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
 
 
 const Navbar = () => {
-
     const { user, logOut } = useContext(AuthContext);
 
 
@@ -25,14 +24,14 @@ const Navbar = () => {
             <Helmet>
                 <title>Akibuki | Navbar </title>
             </Helmet>
-            <div className="bg-gradient-to-r from-cyan-700 to-blue-500">
+            <div className="bg-[#00425A]">
                 <Container>
                     <div className="navbar">
                         <div className="navbar-start">
-                            <Link className="btn btn-ghost normal-case text-2xl my-6">
+                            <Link className="btn btn-ghost normal-case text-xl md:text-2xl">
                                 <p className="flex">
                                     <span className="text-white pr-2">Crown </span>
-                                    <div className="text-center text-4xl text-amber-500"> <AiOutlineCrown /></div>
+                                    <div className="text-center md:text-4xl text-amber-500"> <AiOutlineCrown /></div>
                                     <span className="text-white ps-2">Art</span>
                                 </p>
 
@@ -50,7 +49,7 @@ const Navbar = () => {
                             {
                                 user?.uid ?
                                     <>
-                                        <Link className="text-xl text-white my-4" to='/dashboard'>Dashboard</Link>
+                                        <Link className="text-xl text-white md:my-4" to='/dashboard'>Dashboard</Link>
 
                                         <div className="w-10 mx-4 ">
                                             <img className="rounded-full" src={user.photoURL} />

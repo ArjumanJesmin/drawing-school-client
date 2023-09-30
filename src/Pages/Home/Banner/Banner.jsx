@@ -12,7 +12,7 @@ const Banner = () => {
     <title>Akibuki | Home| Banner</title>
   </Helmet>
     return (
-        <div >
+        <div  className="w-full h-1/2">
              <Carousel>
                 <div>
                     <img src={banner1}  />

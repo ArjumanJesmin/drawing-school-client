@@ -2,6 +2,10 @@ import { Helmet } from "react-helmet-async";
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../Hooks/useAdmin";
 import useInstructor from "../Hooks/useInstructor";
+import { MdClass, MdHotelClass, MdOutlinePayments, MdPayment } from 'react-icons/Md';
+import { SiGoogleclassroom, SiManageiq } from 'react-icons/Si';
+import { AiOutlineHome } from 'react-icons/Ai';
+import { FaUsers } from "react-icons/fa";
 
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
@@ -51,16 +55,16 @@ const Dashboard = () => {
         {/* Side Drawer */}
         <div className="drawer-side ">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 h-full bg-red-200 text-base-content">
+          <ul className="menu p-4 w-60 h-full bg-[#E5C3A6] text-[#1e2e54] text-lg">
             {isAdmin && (
               <>
 
                 <li>
-                  <NavLink to="/dashboard/manageClass">Manage Class</NavLink>
+                  <NavLink to="/dashboard/manageClass"><SiManageiq/> Manage Class</NavLink>
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/allUsers">Manage Users</NavLink>
+                  <NavLink to="/dashboard/allUsers"><FaUsers/> All Users</NavLink>
                 </li>
               </>
             )}
@@ -72,7 +76,7 @@ const Dashboard = () => {
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/myClass">My Class</NavLink>
+                  <NavLink to="/dashboard/myClass"><MdHotelClass/> My Class</NavLink>
                 </li>
 
                 <li>
@@ -85,15 +89,15 @@ const Dashboard = () => {
               <>
 
                 <li>
-                  <NavLink to="/dashboard/myEnrollClass">My Enroll Class</NavLink>
+                  <NavLink to="/dashboard/myEnrollClass"><MdClass/> My Enroll Class</NavLink>
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/mySelectedClass">My Selected Class</NavLink>
+                  <NavLink to="/dashboard/mySelectedClass"><MdHotelClass/> My Selected Class</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/payment">Payment</NavLink>
-                  <NavLink to="/dashboard/paymentHistery">Payment History</NavLink>
+                  <NavLink to="/dashboard/payment"><MdPayment/> Payment</NavLink>
+                  <NavLink to="/dashboard/paymentHistery"><MdOutlinePayments/> Payment History</NavLink>
 
                 </li>
               </>
@@ -103,10 +107,10 @@ const Dashboard = () => {
 
 
             <li>
-              <NavLink to="/">Student Home</NavLink>
+              <NavLink to="/"><AiOutlineHome/> Home</NavLink>
             </li>
             <li>
-              <NavLink to="/class">Class</NavLink>
+              <NavLink to="/class"> <SiGoogleclassroom/>Class</NavLink>
             </li>
           </ul>
         </div>
@@ -116,8 +120,6 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-// import { NavLink, Outlet } from "react-router-dom";
 // import useAdmin from "../Hooks/useAdmin";
 // import useInstructor from "../Hooks/useInstructor";
 

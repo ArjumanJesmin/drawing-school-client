@@ -5,25 +5,25 @@ import { Helmet } from "react-helmet-async";
 import { FaTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import SectionTitle from "../../../Components/SectionTitle";
 
 
 const AllUsers = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [axiosSecure] = useAxiosSecure()
 
 
     const { data: users = [], refetch } = useQuery([], async () => {
-        const res = await fetch('https://akibuki-school-server-side.vercel.app/users')
-        return res.json()
-    })
+        const response = await axiosSecure.get('/users');
+        return response.data;
+    });
 
-    const handleMakeAdmin = user => {
-        fetch(`https://akibuki-school-server-side.vercel.app/users/admin/${user._id}`, {
-            method: 'PATCH'
-        })
-            .then(res => res.json())
-            .then(data => {
-
-                if (data.modifiedCount) {
+    const handleMakeAdmin = (user) => {
+        axiosSecure
+            .patch(`/users/admin/${user._id}`)
+            .then((response) => {
+                if (response.data.modifiedCount) {
                     refetch();
                     Swal.fire({
                         position: 'top-end',
@@ -31,20 +31,19 @@ const AllUsers = () => {
                         title: `${user.name} is an Admin Now!`,
                         showConfirmButton: false,
                         timer: 1500
-                    })
-
+                    });
                 }
             })
+            .catch((error) => {
+                console.error("Error making admin:", error);
+            });
     }
 
-    //---------Instructor--------=============================
     const handleMakeInstructor = (user) => {
-        fetch(`https://akibuki-school-server-side.vercel.app/users/instructor/${user._id}`, {
-            method: 'PATCH',
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.modifiedCount) {
+        axiosSecure
+            .patch(`/users/instructor/${user._id}`)
+            .then((response) => {
+                if (response.data.modifiedCount) {
                     refetch();
                     Swal.fire({
                         position: 'top-end',
@@ -54,11 +53,13 @@ const AllUsers = () => {
                         timer: 1500,
                     });
                 }
+            })
+            .catch((error) => {
+                console.error("Error making instructor:", error);
             });
     };
 
-
-    const handleDelete = (user) => {
+    const handleDelete  = (user) => {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -69,31 +70,31 @@ const AllUsers = () => {
             confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://akibuki-school-server-side.vercel.app/users/admin/${user._id}`, {
-                    method: 'DELETE',
-                })
-                    .then((res) => res.json())
-                    .then((data) => {
-                        if (data.deletedCount > 0) {
+                axiosSecure
+                    .delete(`/users/admin/${user._id}`)
+                    .then((response) => {
+                        if (response.data.deletedCount > 0) {
                             refetch();
                             Swal.fire('Deleted!', 'This user has been deleted.', 'success');
                             navigate('/');
                         }
+                    })
+                    .catch((error) => {
+                        console.error("Error deleting user:", error);
                     });
             }
         });
     };
 
 
-
     return (
-        <div className="w-full">
+        <>
             <Helmet>
                 <title>Akibuki | All users</title>
             </Helmet>
-            <h3 className="text-3xl font-semibold my-4">Total Users: {users.length}</h3>
+            <SectionTitle heading="All" subHeading="Users" ></SectionTitle>
             <div className="overflow-x-auto">
-                <table className="table table-zebra w-full">
+                <table className="table table-zebra w-10/12 mx-auto">
                     {/* head */}
                     <thead>
                         <tr>
@@ -134,7 +135,7 @@ const AllUsers = () => {
                     </tbody>
                 </table>
             </div>
-        </div>
+        </>
     );
 };
 

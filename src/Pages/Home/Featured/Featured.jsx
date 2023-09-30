@@ -9,8 +9,8 @@ import './Featured.css';
 const Featured = () => {
     return (
         <div className="featured-item bg-fixed text-white pt-8 my-20">
-            <SectionTitle heading="Child Draw A Earth" ></SectionTitle>
-            <div className="md:flex justify-center items-center bg-slate-500 bg-opacity-60 pb-20 pt-12 px-36">
+            <SectionTitle heading="Child Draw " subHeading="A Earth" ></SectionTitle>
+            <div className="md:flex justify-center items-center bg-slate-500 bg-opacity-60 pb-20 pt-12 px-4 md:px-36">
                 <div>
                     <img src={one} alt="" />
                 </div>

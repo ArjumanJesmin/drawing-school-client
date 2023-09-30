@@ -6,6 +6,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
+import SectionTitle from "../../../../Components/SectionTitle";
 
 const PaymentHistery = () => {
 
@@ -22,24 +23,20 @@ const PaymentHistery = () => {
             .then(res => res.json())
             .then(data => setUserData(data))
 
-    }, [url])
+    }, [url]);
 
-
-
-    console.log(userData)
     return (
         <div>
-
-            <div className="w-full">
+            <SectionTitle heading="Payment" subHeading="History" />
+            <div className="w-11/12 mx-auto border p-4 rounded-2xl">
                 <Helmet>
                     <title>Akibuki | payment History</title>
                 </Helmet>
-                <h3 className="text-3xl font-semibold my-4  text-center">Total Payment: {userData?.length}</h3>
                 <div className="overflow-x-auto">
                     <table className="table table-zebra w-full">
                         {/* head */}
                         <thead>
-                            <tr>
+                            <tr className="bg-slate-800 text-white">
                                 <th>#</th>
                                 <th>Email</th>
                                 <th>Price</th>
@@ -52,7 +49,7 @@ const PaymentHistery = () => {
                             {
                                 userData.map((user, index) =>
                                     <tr key={user._id}>
-                                        <th>{index + 1}</th>  
+                                        <th>{index + 1}</th>
                                         <td>{user.email}</td>
                                         <td >{user.price}</td>
                                         <td >{user.date}</td>
@@ -60,8 +57,6 @@ const PaymentHistery = () => {
                                         <td >{user.status}</td>
                                     </tr>)
                             }
-
-
                         </tbody>
                     </table>
                 </div>

@@ -6,10 +6,13 @@ import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
+import Lottie from "lottie-react-web";
+import login from "../../../public/login.json"
+import SectionTitle from "../../Components/SectionTitle";
+
 
 
 const Login = () => {
-
     const { signIn } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
@@ -30,34 +33,45 @@ const Login = () => {
                         popup: 'animate__animated animate__fadeOutUp'
                     }
                 })
-                navigate(from,{replace:true});
+                navigate(from, { replace: true });
             })
-        console.log(data)
     };
     return (
         <>
             <Helmet>
-                <title> Akibuki Art  | Login</title>
+                <title> Akibuki Art | Login</title>
             </Helmet>
-            <div className="w-1/3 gap-4 mx-auto border p-14 m-8 rounded-lg shadow-xl border-orange-400">
-                <h2 className="text-3xl font-semibold text-center pb-8 ">Login</h2>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div>
-                        <label htmlFor="email">Email:</label>
-                        <input type="email" className="input input-bordered w-full mb-4 " defaultValue="email" {...register("email", { required: true })} />
+            <SectionTitle heading="Login" subHeading="Page"/>
+            <div className="grid md:grid-cols-2">
+                <Lottie
+                    options={{
+                        animationData: login,
+                        loop: true,
+                        autoplay: true,
+                    }}
+                    width={450}
+                    height={450}
+                />
+                <div className="  mx-auto border p-8 my-4 rounded-lg shadow-2xl bg-sky-50">
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <div>
+                            <label htmlFor="email">Email:</label>
+                            <input type="email" className="input input-bordered w-full " defaultValue="email" {...register("email", { required: true })} />
 
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password:</label>
-                        <input type="password" className="input input-bordered w-full mb-4 " {...register("password", { required: true, minLength: 6, pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/ })} />
-                    </div>
+                        </div>
+                        <div>
+                            <label htmlFor="password">Password:</label>
+                            <input type="password" className="input input-bordered w-full mb-4 " {...register("password", { required: true, minLength: 6, pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/ })} />
+                        </div>
 
-                    <br />
-                    <input className="btn btn-outline w-full btn-warning" type="submit" value="Login" />
-                </form>
-                <p className="py-6"> You have no account please <Link className="text-orange-500" to='/register'>Register</Link></p>
-                <SocialLogin/>
+                        
+                        <input className="btn btn-outline w-full btn-warning" type="submit" value="Login" />
+                    </form>
+                    <p className="py-6"> You have no account please <Link className="text-orange-500" to='/register'>Register</Link></p>
+                    <SocialLogin />
+                </div>
             </div>
+
         </>
     );
 };

@@ -8,7 +8,7 @@ const InstructorsPage = () => {
     const popular = menu.filter(item => item.availableSeats === "20")
     return (
         <>
-            <SectionTitle heading="Popular Instructors" />
+            <SectionTitle heading="Popular" subHeading="Instructors" />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:my-10 bg-slate-50 shadow-lg border md:p-8 p-4">
                 {
                     popular.map(item => <>

@@ -7,6 +7,7 @@ import useInstructor from "../../Hooks/useInstructor";
 import Swal from "sweetalert2";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 
 
@@ -16,61 +17,54 @@ const AllClass = ({ classData }) => {
 
     const [isAdmin] = useAdmin();
     const [isInstructor] = useInstructor();
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
+    const [axiosSecure] = useAxiosSecure()
 
-    const { _id, name, image, price, instructor } = classData
+    const { _id, name, image, price, instructor } = classData;
 
-    //-------------------------------
     const handleCourseSelection = (classData) => {
-        console.log(classData,user? user.email:'');
-       
+        console.log(classData, user ? user.email : '');
 
         if (user && user.email) {
-            const classItem = { name, image, availableSeats, email: user? user.email:'' }
-            fetch('https://akibuki-school-server-side.vercel.app/myClass', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(classItem)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log({ data });
+            const classItem = { name, image, availableSeats, email: user ? user.email : '' };
 
-                    if (data.insertedId) {
+            axiosSecure
+                .post('/myClass', classItem)
+                .then((response) => {
+                    if (response.data.insertedId) {
                         // refetch();
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
-                            title: 'This class added on the cart.',
+                            title: 'This class added to the cart.',
                             showConfirmButton: false,
-                            timer: 1500
-                        })
+                            timer: 1500,
+                        });
                     }
                 })
-        }
-        else {
+                .catch((error) => {
+                    console.error("Error adding class to the cart:", error);
+                });
+        } else {
             Swal.fire({
-                title: 'Please login to order the food',
+                title: 'Please login to order the class',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Login now!'
+                confirmButtonText: 'Login now!',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Navigate('/login', { state: { from: location } })
+                    Navigate('/login', { state: { from: location } });
                 }
-            })
+            });
         }
-
     };
-    //-------------------------------
+
+
     return (
         <>
             <div
-                // key={index}
                 style={{
                     backgroundColor: availableSeats === 0 ? 'red' : 'white',
                     padding: '10px',
@@ -78,7 +72,7 @@ const AllClass = ({ classData }) => {
                 }}
             >
                 <div className="card w-96 bg-base-100 shadow-xl">
-                    <img  src={image} alt="Class" />
+                    <img src={image} alt="Class" className="h-64" />
                     <div className="card-body">
                         <h2>{name}</h2>
                         <p>Instructor: {instructor}</p>

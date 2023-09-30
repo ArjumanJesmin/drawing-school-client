@@ -23,7 +23,6 @@ const CheckoutForm = ({ cart, price }) => {
         if(price==0) return
         axiosSecure.post('/create-payment-intent', { price })
             .then(res => {
-                // console.log(res.data.clientSecret);
                 setClientSecret(res.data.clientSecret)
             })
     }, [price])
@@ -52,7 +51,6 @@ const CheckoutForm = ({ cart, price }) => {
         }
         else {
             setCardError('');
-            // console.log('Payment Method', paymentMethod);
         }
         setProcessing(true)
 
@@ -93,7 +91,6 @@ const CheckoutForm = ({ cart, price }) => {
             .then(res =>{
                 console.log(res.data);
                 if (res.data.insertResult.insertedId){
-                    //display confirm use sweet 
                     alert('confirm successfully')
                 }
             })
@@ -104,12 +101,11 @@ const CheckoutForm = ({ cart, price }) => {
 
     return (
         <>
-            <form className=" m-8" onSubmit={handleSubmit}>
+            <form className="" onSubmit={handleSubmit}>
                 <CardElement
                     options={{
                         style: {
-                            base: {
-                                fontSize: '16px',
+                            base: {  
                                 color: '#424770',
                                 '::placeholder': {
                                     color: '#aab7c4',
