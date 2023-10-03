@@ -1,14 +1,17 @@
 /* eslint-disable no-unused-vars */
 import { Helmet } from "react-helmet-async";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import SectionTitle from "../../../Components/SectionTitle";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const ManageClass = () => {
-
+  const { user } = useContext(AuthContext)
   const [showClass, setShowClass] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [userData, setUserData] = useState([]);
   const [axiosSecure] = useAxiosSecure()
 
   useEffect(() => {
@@ -24,24 +27,15 @@ const ManageClass = () => {
   }, [axiosSecure]);
 
 
-  const handlePost = (data) => {
+
+  const handlePost = () => {
     axiosSecure
-      .post('/manageClass', data, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then(() => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Class Posted successfully.',
-          showConfirmButton: false,
-          timer: 1500,
-        });
+      .get(`/paymentHistory?email=${user?.email}`)
+      .then((response) => {
+        setUserData(response.data);
       })
       .catch((error) => {
-        console.error("Error posting class:", error);
+        console.error('Error fetching payment history:', error);
       });
   };
 
@@ -107,7 +101,7 @@ const ManageClass = () => {
                   <td>{data.availableSeats}</td>
 
                   <td><button onClick={() => handleDelete(data)} className="btn btn-sm bg-red-500  text-white">Reject</button></td>
-                  <td><button onClick={() => handlePost(data)} className="btn btn-sm bg-lime-600 text-white">Post</button></td>
+                  <td><button onClick={() => handlePost(userData)} className="btn btn-sm bg-lime-600 text-white">Post</button></td>
                 </tr>)
               }
             </tbody>

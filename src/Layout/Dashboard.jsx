@@ -4,7 +4,7 @@ import useAdmin from "../Hooks/useAdmin";
 import useInstructor from "../Hooks/useInstructor";
 import { MdClass, MdHotelClass, MdOutlinePayments, MdPayment } from 'react-icons/Md';
 import { SiGoogleclassroom, SiManageiq } from 'react-icons/Si';
-import { AiOutlineHome } from 'react-icons/Ai';
+import { AiOutlineHome,AiOutlineAppstoreAdd } from 'react-icons/Ai';
 import { FaUsers } from "react-icons/fa";
 
 const Dashboard = () => {
@@ -58,13 +58,15 @@ const Dashboard = () => {
           <ul className="menu p-4 w-60 h-full bg-[#E5C3A6] text-[#1e2e54] text-lg">
             {isAdmin && (
               <>
-
                 <li>
-                  <NavLink to="/dashboard/manageClass"><SiManageiq/> Manage Class</NavLink>
+                  <NavLink to="/dashboard/addAClass"><AiOutlineAppstoreAdd/> Add A Class</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/manageClass"><SiManageiq /> Manage Class</NavLink>
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/allUsers"><FaUsers/> All Users</NavLink>
+                  <NavLink to="/dashboard/allUsers"><FaUsers /> All Users</NavLink>
                 </li>
               </>
             )}
@@ -72,11 +74,7 @@ const Dashboard = () => {
               <>
 
                 <li>
-                  <NavLink to="/dashboard/addAClass">Add A Class</NavLink>
-                </li>
-
-                <li>
-                  <NavLink to="/dashboard/myClass"><MdHotelClass/> My Class</NavLink>
+                  <NavLink to="/dashboard/myClass"><MdHotelClass /> My Class</NavLink>
                 </li>
 
                 <li>
@@ -89,15 +87,15 @@ const Dashboard = () => {
               <>
 
                 <li>
-                  <NavLink to="/dashboard/myEnrollClass"><MdClass/> My Enroll Class</NavLink>
+                  <NavLink to="/dashboard/myEnrollClass"><MdClass /> My Enroll Class</NavLink>
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/mySelectedClass"><MdHotelClass/> My Selected Class</NavLink>
+                  <NavLink to="/dashboard/mySelectedClass"><MdHotelClass /> My Selected Class</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/payment"><MdPayment/> Payment</NavLink>
-                  <NavLink to="/dashboard/paymentHistery"><MdOutlinePayments/> Payment History</NavLink>
+                  <NavLink to="/dashboard/payment"><MdPayment /> Payment</NavLink>
+                  <NavLink to="/dashboard/paymentHistery"><MdOutlinePayments /> Payment History</NavLink>
 
                 </li>
               </>
@@ -107,10 +105,10 @@ const Dashboard = () => {
 
 
             <li>
-              <NavLink to="/"><AiOutlineHome/> Home</NavLink>
+              <NavLink to="/"><AiOutlineHome /> Home</NavLink>
             </li>
             <li>
-              <NavLink to="/class"> <SiGoogleclassroom/>Class</NavLink>
+              <NavLink to="/class"> <SiGoogleclassroom />Class</NavLink>
             </li>
           </ul>
         </div>

@@ -11,11 +11,20 @@ import Lottie from "lottie-react-web";
 
 import login from "../../../../public/login.json"
 
+import { useState } from 'react';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/Fa';
+
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, updateUserProfile } = useContext(AuthContext)
     const navigate = useNavigate();
     const [axiosSecure] = useAxiosSecure()
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     const onSubmit = (data) => {
         createUser(data.email, data.password)
@@ -76,21 +85,38 @@ const Register = () => {
                             <input type="email" className="input input-bordered w-full mb-4 " defaultValue="email" {...register("email", { required: true })} />
                         </div>
 
-                        <div >
+                        <div>
                             <label htmlFor="password">Password:</label>
-                            <input type="password" className="input input-bordered w-full mb-4 " {...register("password", { required: true, minLength: 6, pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/ })} />
-                            {errors.password?.type === 'required' && <p className="text-red-600">Password is required</p>}
-                            {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
-                            {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one Uppercase one lower case, one number and one special character.</p>}
+                            <div className="relative flex items-center">
+                                <input
+                                    type={showPassword ? 'text' : 'password'}
+                                    className="input input-bordered w-full mb-4 "
+                                    {...register("password", {
+                                        required: true,
+                                        minLength: 6,
+                                        pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/,
+                                    })}
+                                />
+                                <span
+                                    className="absolute right-4 top-4 cursor-pointer"
+                                    onClick={togglePasswordVisibility}
+                                >
+                                    {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                                </span>
+                            </div>
+                            {errors.password?.type === 'required' && (
+                                <p className="text-red-600">Password is required</p>
+                            )}
+                            {errors.password?.type === 'minLength' && (
+                                <p className="text-red-600">Password must be 6 characters</p>
+                            )}
+                            {errors.password?.type === 'pattern' && (
+                                <p className="text-red-600">
+                                    Password must have one Uppercase one lowercase, one number, and one special character.
+                                </p>
+                            )}
                         </div>
-
-                        {/* <div>
-                        <label htmlFor="text">Conform Password:</label>
-                        <input type="password" className="input input-bordered w-full  mb-4"  {...register("confirm password", { required: true })} />
-                        {errors.password?.type === 'required' && <p className="text-red-600">Password is required</p>}
-                        {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
-                        {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one Uppercase one lower case, one number and one special character.</p>}
-                    </div> */}
+                        
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Photo URL</span>

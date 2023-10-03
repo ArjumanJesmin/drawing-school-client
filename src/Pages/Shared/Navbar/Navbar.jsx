@@ -42,7 +42,6 @@ const Navbar = () => {
                                 <li><Link className=" text-xl text-white" to='/'>Home</Link></li>
                                 <li><Link className=" text-xl text-white" to='/instructors'>Instructors</Link></li>
                                 <li><Link className=" text-xl text-white" to='/class'>Classes</Link></li>
-
                             </ul>
                         </div>
                         <div className="navbar-end">

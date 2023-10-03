@@ -56,9 +56,8 @@ const AddAClass = () => {
                 <title>Akibuki | Add A Class </title>
             </Helmet>
 
-            <div className="w-full px-10 shadow-lg py-2">
-                <SectionTitle heading="Add A Class" />
-
+                <SectionTitle heading="Add" subHeading="A Class"/>
+            <div className="w-10/12 mx-auto px-10 shadow-2xl rounded-2xl py-4">
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                     <div className="form-control w-full mb-4">
@@ -105,7 +104,7 @@ const AddAClass = () => {
                             <input type="number" {...register("price", { required: true })} placeholder="Type here" className="input input-bordered w-full " />
                         </div>
                     </div>
-                    <input className="btn mt-4 btn-outline  " type="submit" value="Add Class" />
+                    <input className="btn mt-4 btn-outline w-full " type="submit" value="Add Class" />
                 </form>
             </div>
         </>

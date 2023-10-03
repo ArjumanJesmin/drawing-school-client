@@ -7,28 +7,28 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../../Components/SectionTitle";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const PaymentHistery = () => {
-
-
     const { user } = useContext(AuthContext)
     const [userData, setUserData] = useState([])
-
-
-    const url = `https://akibuki-school-server-side.vercel.app/paymentHistory?email=${user?.email}`;
-
+    const [axiosSecure] = useAxiosSecure()
 
     useEffect(() => {
-        fetch(url)
-            .then(res => res.json())
-            .then(data => setUserData(data))
-
-    }, [url]);
+        axiosSecure
+            .get(`/paymentHistory?email=${user?.email}`)
+            .then((response) => {
+                setUserData(response.data);
+            })
+            .catch((error) => {
+                console.error('Error fetching payment history:', error);
+            });
+    }, [axiosSecure, user?.email]);
 
     return (
         <div>
             <SectionTitle heading="Payment" subHeading="History" />
-            <div className="w-11/12 mx-auto border p-4 rounded-2xl">
+            <div className="w-full mx-auto border p-4 rounded-2xl">
                 <Helmet>
                     <title>Akibuki | payment History</title>
                 </Helmet>

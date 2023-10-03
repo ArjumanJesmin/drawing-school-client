@@ -1,12 +1,14 @@
 /* eslint-disable no-undef */
 import { Helmet } from "react-helmet-async";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const MyClass = () => {
 
   const [classes, setClasses] = useState([]);
   const [axiosSecure] = useAxiosSecure()
+  const {user} =  useContext(AuthContext)
 
   const handleUpdate = (data) => {
     axiosSecure
