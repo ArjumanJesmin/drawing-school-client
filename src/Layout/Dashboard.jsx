@@ -5,12 +5,11 @@ import useInstructor from "../Hooks/useInstructor";
 import { MdClass, MdHotelClass, MdOutlinePayments, MdPayment } from 'react-icons/Md';
 import { SiGoogleclassroom, SiManageiq } from 'react-icons/Si';
 import { AiOutlineHome,AiOutlineAppstoreAdd } from 'react-icons/Ai';
-import { FaUsers } from "react-icons/fa";
+import { FaUsers } from "react-icons/Fa";
 
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
-  console.log({ isAdmin });
 
   return (
     <>

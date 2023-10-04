@@ -63,7 +63,6 @@ const Login = () => {
                         <div>
                             <label htmlFor="email">Email:</label>
                             <input type="email" className="input input-bordered w-full " defaultValue="email" {...register("email", { required: true })} />
-
                         </div>
                         <div>
                             <label htmlFor="password">Password:</label>
