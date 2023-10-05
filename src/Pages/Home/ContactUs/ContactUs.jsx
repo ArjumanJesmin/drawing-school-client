@@ -4,6 +4,7 @@ import contact from "../../../../public/contact.json";
 import { useForm } from "react-hook-form";
 import SectionTitle from "../../../Components/SectionTitle";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const ContactUs = () => {
   const {
@@ -11,18 +12,39 @@ const ContactUs = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  
+
   const [axiosSecure] = useAxiosSecure();
 
   const onSubmit = async (data) => {
+    const { email, subject, message } = data;
+    const newItem = { email, subject, message };
+  
     try {
-      // Make a POST request to the server endpoint
-      const response = await axiosSecure.post("/send-email", data);
-      console.log(response.data.message);
+      const response = await axiosSecure.post('/send-email', newItem);
+  
+      if (response.status === 200) {
+        if (response.data && response.data.insertedId) {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Send Message Successfully',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      } else {
+        console.error('Unexpected status code:', response.status);
+      }
     } catch (error) {
-      console.error(error.message);
+      console.error('Error sending the email:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+      });
     }
   };
+  
 
   return (
     <>
@@ -39,7 +61,8 @@ const ContactUs = () => {
             height={350}
           />
         </div>
-        <div className="my-4 bg-cyan-100 rounded-lg border p-6 shadow-lg">
+
+        <div className="my-4 bg-cyan-100 rounded-lg border p-6 md:mx-3 shadow-lg">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label htmlFor="email">Email:</label>

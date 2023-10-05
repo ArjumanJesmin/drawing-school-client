@@ -28,11 +28,8 @@ const AddAClass = () => {
                     const imgURL = imgResponse.data.display_url;
                     const { instructor, price, category, availableSeats, className } = data;
                     const newItem = { className, instructor, price: parseFloat(price), category, image: imgURL, availableSeats: parseInt(availableSeats) }
-                    console.log(newItem)
                     axiosSecure.post('/studentClass', newItem)
                         .then(data => {
-                            console.log('after processing new menu item', data.data)
-
                             if (data.data.insertedId) {
                                 reset();
                                 Swal.fire({
@@ -56,7 +53,7 @@ const AddAClass = () => {
                 <title>Akibuki | Add A Class </title>
             </Helmet>
 
-                <SectionTitle heading="Add" subHeading="A Class"/>
+            <SectionTitle heading="Add" subHeading="A Class" />
             <div className="w-10/12 mx-auto px-10 shadow-2xl rounded-2xl py-4">
                 <form onSubmit={handleSubmit(onSubmit)}>
 
